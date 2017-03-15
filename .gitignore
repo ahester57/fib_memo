@@ -3,3 +3,5 @@ _memo.log
 _nomemo.log
 memo*
 nomemo*
+*.pdf
+*.gz

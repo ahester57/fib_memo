@@ -25,13 +25,10 @@ void makeOutput(const char* method, int N, unsigned long long F, double time_tak
 	strcat(file, ".log");
 	
 	FILE* fq = fopen(file, "a");
+	
+	// make table data in LaTeX
 	if (fq != NULL) {
-		fprintf(fq, "---------------------------\r\n");
-		fprintf(fq, "Method:\t%s\r\n", method);
-		fprintf(fq, "N:\t%d\r\n", N);
-		fprintf(fq, "f(N):\t%llu\r\n", F);
-		fprintf(fq, "Time:\t%f\r\n", time_taken);
-		fprintf(fq, "---------------------------\r\n");
+		fprintf(fq, "\t%d & %llu & %.3f \\\\ \r\n", N, F, time_taken);
 	}
 	fclose(fq);
 	
@@ -40,17 +37,17 @@ void makeOutput(const char* method, int N, unsigned long long F, double time_tak
 	printf("Method:\t%s\r\n", method);
 	printf("N:\t%d\r\n", N);
 	printf("f(N):\t%llu\r\n", F);
-	printf("Time:\t%f\r\n", time_taken);
+	printf("Time:\t%.3f\r\n", time_taken);
 	printf("---------------------------\r\n");
 	
 }
 
 int getNumLines(FILE* fp) {
 	int n = 0;
-	char* line = malloc(24*sizeof(char));
+	char* line = malloc(80*sizeof(char));
 	
 	fseek(fp, 0, SEEK_SET);
-	while (fgets(line, 24, (FILE*)fp)) {
+	while (fgets(line, 80, (FILE*)fp)) {
 		n++;
 	}
 	free(line);

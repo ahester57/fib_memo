@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
 	clock_t begin = clock();
 	
 	int N = atoi(argv[1]);
-	int fN;
+	unsigned long long fN;
 	if (N >= 0) {
 		fN = f(N);
 		printf("F%d = %llu\r\n", N, fN);	//terribly slow

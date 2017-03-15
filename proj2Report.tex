@@ -1,0 +1,150 @@
+
+% CS 4710 HW 1
+
+\documentclass{article}
+\usepackage{titling}
+\usepackage{multirow}
+\usepackage{siunitx}	% for scientific notation
+
+\setlength{\droptitle}{-15em}
+
+\begin{document}
+
+\title{CS3130 - Project 2}
+\author{Austin Hester}
+\date{$\pi$ + 0.01, 2017}
+\maketitle
+
+
+% This makes it so sections aren't automatically numbered
+\makeatletter
+\def\@seccntformat#1{%
+	 \expandafter\ifx\csname c@#1\endcsname\c@section\else
+	  \csname the#1\endcsname\quad
+  \fi}
+\makeatother
+
+%%%	Begin		%%%
+
+%% Results Section %%
+
+\section{Results}
+
+
+\begin{center}
+
+\begin{tabular}{ | l | c | r | }
+
+	\multicolumn{3}{ c }{Memoization} \\
+	\hline
+	 n & $f_n$ & Time \\ \hline  
+
+	64 & 10610209857723 & 0.000 \\ 
+	67 & 44945570212853 & 0.000 \\ 
+	71 & 308061521170129 & 0.000 \\ 
+	73 & 806515533049393 & 0.000 \\ 
+	79 & 14472334024676221 & 0.000 \\ 
+	83 & 99194853094755497 & 0.000 \\ 
+	89 & 1779979416004714189 & 0.000 \\ 
+	93 & 12200160415121876738 & 0.000 \\ 
+	94 & 1293530146158671551 & 0.000 \\ 
+	100 & 3736710778780434371 & 0.000 \\ 
+	5555 & 4281172103992949353 & 0.000 \\ 
+	55555 & 15241805839757988469 & 0.015 \\ 
+	555555 & 2326674059843183362 & 0.155 \\ 
+	5555555 & 4485202671650115913 & 1.531 \\ 
+	\hline
+
+\end{tabular}
+\quad
+\begin{tabular}{ | l | c | r | }
+
+	\multicolumn{3}{ c }{Pure Recursion} \\
+	\hline
+	 n & $f_n$ & Time \\ \hline  
+
+	16 & 987 & 0.000 \\ 
+	19 & 4181 & 0.000 \\ 
+	23 & 28657 & 0.000 \\ 
+	27 & 196418 & 0.000 \\ 
+	32 & 2178309 & 0.015 \\ 
+	36 & 14930352 & 0.125 \\ 
+	38 & 39088169 & 0.343 \\ 
+	39 & 63245986 & 0.562 \\ 
+	40 & 102334155 & 0.906 \\ 
+	41 & 165580141 & 1.500 \\ 
+	44 & 701408733 & 6.218 \\ 
+	45 & 1134903170 & 10.046 \\ 
+	48 & 4807526976 & 42.625 \\ 
+	\hline
+
+\end{tabular}
+
+\end{center}
+
+
+
+%% Analysis Section %%
+
+\section{Analysis}
+
+%	Recursion	%
+
+\subsection{Recursion}
+
+Bubble sort took (literally) exponentially more time as the number of elements increased. \\
+
+	Based on $T(n) = \theta (n^2)$, I got a "sort constant," $c \approx \num{1.566e9}$ from $\frac{n^2}{t}$ \\
+
+Although this "sort constant" varies slightly from run to run, it can be used to successfully predict the time a certain
+execution will take. For example, I was able to predict a bubble sort of 2 million integers would take 2547s using
+the equation $t \approx \frac{n^2}{1.56e9}$, and the actual time ended up being 2571s.
+
+\subsubsection{Average-case}
+
+Average case  \\
+
+	$T(n) = \theta (n^2)$
+
+\newpage
+
+%	Memoization		%
+
+\subsection{Memoization}
+
+Stops being right due to limits of unsigned long long at $94$.
+
+
+	From $T(n) = \theta (n \lg{n})$,the "sort constant," $c \approx \num{4.270e7}$ from $\frac{n \lg{n}}{t}$ \\
+
+
+
+\subsubsection{Average-case}
+
+Average case  \\
+
+	$T(n) = \theta (n^2)$
+
+
+
+%% Conclusion %%
+
+\section{Conclusion}
+
+Don't use bubble sort unless you are using it to check to make sure an seemingly sorted list is completely sorted.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

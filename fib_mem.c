@@ -20,26 +20,10 @@ int main(int argc, char** argv) {
 	// As big as big
 	unsigned long long* R;
 	int N = atoi(argv[1]);
-	FILE* fp;
 	
 	if (N >= 0) {
-		
 		R = malloc((N+1) * sizeof(unsigned long long));
-		
-		// is this part cheating for efficiency?
-		// fp = fopen("_fib.log", "r");
-		// if (fp == NULL) {
-			// buildList(R, N);		// memoize and memorize
-		// } else {
-			// if (N > getNumLines(fp)) {
-				// buildList(R, N);
-			// } else {
-				// printf("list read from file\r\n");
-				// setArray(R, fp);	//do magic
-			// }
-		// }
 		buildList(R, N);
-		
 		
 		printf("F%d = %llu\r\n", N, R[N]);
 		
@@ -50,10 +34,9 @@ int main(int argc, char** argv) {
 	clock_t end = clock();
 	time_taken = (double)(end - begin) / CLOCKS_PER_SEC;
 	
-	//makeOutput(method, N, R[N], time_taken);
+	makeOutput(method, N, R[N], time_taken);
 	
 	free(R);
-	fclose(fp);
 	return 0;
 } 
 
