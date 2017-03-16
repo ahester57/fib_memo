@@ -6,11 +6,11 @@
 \usepackage{multirow}
 \usepackage{siunitx}	% for scientific notation
 
-\setlength{\droptitle}{-15em}
+\setlength{\droptitle}{-10em}
 
 \begin{document}
 
-\title{CS3130 - Project 2}
+\title{CS 3130 - Project 2}
 \author{Austin Hester}
 \date{$\pi$ + 0.01, 2017}
 \maketitle
@@ -32,12 +32,34 @@
 
 
 \begin{center}
-
 \begin{tabular}{ | l | c | r | }
-
-	\multicolumn{3}{ c }{Memoization} \\
 	\hline
-	 n & $f_n$ & Time \\ \hline  
+	\multicolumn{3}{ |c| }{Pure Recursion} \\
+	\hline
+	$n$ & $f_n$ & Time (s) \\ \hline  
+
+	16 & 987 & 0.000 \\ 
+	19 & 4181 & 0.000 \\ 
+	23 & 28657 & 0.000 \\ 
+	32 & 2178309 & 0.015 \\ 
+	36 & 14930352 & 0.125 \\ 
+	38 & 39088169 & 0.343 \\ 
+	40 & 102334155 & 0.906 \\ 
+	41 & 165580141 & 1.500 \\ 
+	44 & 701408733 & 6.218 \\ 
+	45 & 1134903170 & 10.046 \\ 
+	48 & 4807526976 & 42.625 \\ 
+	55 & 139583862445 & 1245.358 \\ 
+	64 & ???? & 5+ hrs \\
+	\hline
+
+\end{tabular}
+\quad
+\begin{tabular}{ | l | c | r | }
+	\hline
+	\multicolumn{3}{ |c| }{Memoization} \\
+	\hline
+	$n$ & $f_n$ & Time (s) \\ \hline  
 
 	64 & 10610209857723 & 0.000 \\ 
 	67 & 44945570212853 & 0.000 \\ 
@@ -49,40 +71,28 @@
 	93 & 12200160415121876738 & 0.000 \\ 
 	94 & 1293530146158671551 & 0.000 \\ 
 	100 & 3736710778780434371 & 0.000 \\ 
+
+	3600000 & 3525674565886733824 & 0.999 \\ 
+
+	22222 & 834908324885882015 & 0.015 \\ 
+	222222 & 6438811801179161448 & 0.062 \\ 
+	2222222 & 11902358359429960313 & 0.609 \\ 
+	22222222 & 14468215713834216991 & 6.092 \\ 
+	222222222 & 6495968894011374952 & 61.609 \\ 
+
 	5555 & 4281172103992949353 & 0.000 \\ 
 	55555 & 15241805839757988469 & 0.015 \\ 
 	555555 & 2326674059843183362 & 0.155 \\ 
 	5555555 & 4485202671650115913 & 1.531 \\ 
+	55555555 & 18256636889160166581 & 15.421 \\ 
+	555555555 & 11757213551281829122 & 154.187 \\ 
+
 	\hline
 
 \end{tabular}
-\quad
-\begin{tabular}{ | l | c | r | }
-
-	\multicolumn{3}{ c }{Pure Recursion} \\
-	\hline
-	 n & $f_n$ & Time \\ \hline  
-
-	16 & 987 & 0.000 \\ 
-	19 & 4181 & 0.000 \\ 
-	23 & 28657 & 0.000 \\ 
-	27 & 196418 & 0.000 \\ 
-	32 & 2178309 & 0.015 \\ 
-	36 & 14930352 & 0.125 \\ 
-	38 & 39088169 & 0.343 \\ 
-	39 & 63245986 & 0.562 \\ 
-	40 & 102334155 & 0.906 \\ 
-	41 & 165580141 & 1.500 \\ 
-	44 & 701408733 & 6.218 \\ 
-	45 & 1134903170 & 10.046 \\ 
-	48 & 4807526976 & 42.625 \\ 
-	\hline
-
-\end{tabular}
-
 \end{center}
 
-
+\newpage
 
 %% Analysis Section %%
 
@@ -92,46 +102,52 @@
 
 \subsection{Recursion}
 
-Bubble sort took (literally) exponentially more time as the number of elements increased. \\
+\hspace{1em} Computing the Fibonacci numbers purely recursively has an order of growth in $\theta (1.618^{n+1})$. \\
 
-	Based on $T(n) = \theta (n^2)$, I got a "sort constant," $c \approx \num{1.566e9}$ from $\frac{n^2}{t}$ \\
+	$T(n) = \Theta (1.618^{n+1}) \Rightarrow$ I got a "sort constant," $c \approx \num{4.1e8}$ from $\frac{1.618^{n+1}}{t}$ \\
 
 Although this "sort constant" varies slightly from run to run, it can be used to successfully predict the time a certain
-execution will take. For example, I was able to predict a bubble sort of 2 million integers would take 2547s using
-the equation $t \approx \frac{n^2}{1.56e9}$, and the actual time ended up being 2571s.
+execution will take. For example, I was able to predict computing the $48^{th}$ Fibonacci number would take 42.38s using
+the equation $t \approx \frac{1.618^{n+1}}{4.1e8}$, and the actual time ended up being 42.625s. \\
 
-\subsubsection{Average-case}
+Using this method, I predict that computing the $64^{th}$ Fibonacci number will take $93500s \approx 26$ HOURS.
 
-Average case  \\
 
-	$T(n) = \theta (n^2)$
-
-\newpage
 
 %	Memoization		%
 
 \subsection{Memoization}
 
-Stops being right due to limits of unsigned long long at $94$.
+\hspace{1em} Stops being right due to limits of unsigned long long at $94$. \\
 
+	From $T(n) = \Theta (n)$, I got a "sort constant," $c \approx \num{3.6e6}$ from $\frac{n}{t}$ \\
 
-	From $T(n) = \theta (n \lg{n})$,the "sort constant," $c \approx \num{4.270e7}$ from $\frac{n \lg{n}}{t}$ \\
+Using $c$, we can predict the time taken, in seconds, of the computation of the $n^{th}$ Fiboncci number with: 
 
+\begin{center}
+$t \approx {n} \div (\num{3.6e6})$
+\end{center}
 
+And indeed, computing the $3,600,000^{th}$ Fibonacci number took $0.999s$. \\
 
-\subsubsection{Average-case}
+Interestingly, the Fibonacci numbers consisting of a certain number of $5s$ have running times:
 
-Average case  \\
+\begin{center}
+$t \approx 1.5 \times 10^{m}$, where $m = \# of digits - 7$
+\end{center}
 
-	$T(n) = \theta (n^2)$
+With $2s$:
 
+\begin{center}
+$t \approx 6 \times 10^{m}$, where $m = \# of digits - 8$
+\end{center}
 
-
+Which confirms a linear growth rate.
 %% Conclusion %%
 
 \section{Conclusion}
 
-Don't use bubble sort unless you are using it to check to make sure an seemingly sorted list is completely sorted.
+\hspace{1em} Don't waste energy trying to compute the $64^{th}$ Fiboncci number purely recursively.
 
 \end{document}
 
